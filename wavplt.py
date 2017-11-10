@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 # framerate:采样频率
 # nframes:采样点数
 wavpath = "E:\\1.wav"
-mp3path = "E:\\1.mp3"
 
 
 def wavread(path):
@@ -21,7 +20,7 @@ def wavread(path):
     datawav = wavfile.readframes(nframes)
     wavfile.close()
     wavdata = np.fromstring(datawav, dtype=np.short)
-    wavdata.shape = -1, 2
+    wavdata.shape = -1, wavchl
     wavdata = wavdata.T
     wavtime = np.arange(0, nframes) * (1.0 / framerate)
     return wavchl, wavdata, wavtime
@@ -31,7 +30,7 @@ def main():
     path = wavpath
     wavchl, wavdata, wavtime = wavread(path)
     plt.title("Night.wav's Frames")
-    colors = np.array(["red","green"])
+    colors = np.array(["red", "green"])
     for i in range(wavchl):
         plt.subplot(np.add(i, 211))
         plt.plot(wavtime, wavdata[i], colors[i])
